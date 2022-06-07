@@ -91,7 +91,7 @@
 
 .main {
     flex: 1;
-    margin: 5%;
+    margin: 5% 5% 0 5%;
 }
 
 .info {
@@ -109,6 +109,11 @@
 
 #map {
     height: 180px;
+}
+
+.footer {
+    text-align: center;
+    margin: 10px 0;
 }
 
 @media only screen and (max-width: 740px) {
