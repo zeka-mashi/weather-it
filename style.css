@@ -98,8 +98,11 @@
     height: fit-content;
     width: fit-content;
     border: 1px solid black;
-    display: flex;
     margin: auto;
+}
+
+.location-wrapper {
+    display: flex;
 }
 
 .map {
@@ -111,9 +114,14 @@
     height: 180px;
 }
 
-.footer {
+footer {
     text-align: center;
     margin: 10px 0;
+}
+
+footer a {
+    vertical-align: middle;
+    color: black;
 }
 
 @media only screen and (max-width: 740px) {
