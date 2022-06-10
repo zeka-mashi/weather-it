@@ -5,12 +5,25 @@
     padding: 0;
 }
 
+body {
+    background: lightgray;
+}
+
+.nos {
+    user-select: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
 .container {
     display: flex;
     flex-direction: column;
-    width: 100vw;
-    height: 100vh;
-    background: lightgray;
+    gap: 50px;
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
 }
 
 .nav {
@@ -100,16 +113,16 @@
 
 .main {
     display: flex;
-    flex-direction: column;
+    gap: 30px;
     flex: 1;
-    margin: 5% 5% 0 5%;
+    margin: 0 5%;
 }
 
 .info {
     height: fit-content;
     width: fit-content;
-    border: 1px solid black;
     margin: auto;
+    background: #bbcedf;
 }
 
 .info-heading {
@@ -131,6 +144,56 @@
     margin: 3px auto 10px auto;
 }
 
+.display-wrapper {
+    padding: 0 20px;
+}
+
+.temp-text {
+    font-weight: 100;
+}
+
+#temp > span:last-child,
+#temp_feels_like > span:last-child {
+    font-size: 28px;
+}
+
+#temp_high > svg {
+    color: #6c1414;
+}
+
+#temp_low > svg {
+    color: #1f1f89;
+}
+
+#wind_speed > svg {
+    color: whitesmoke;
+}
+
+#humidity > svg {
+    color: #006593;
+}
+
+#sunrise > svg {
+    color: #f3f300;
+}
+
+#sunset > svg {
+    color: gray;
+}
+
+#status {
+    font-style: italic;
+}
+
+.other-info {
+    margin: 20px auto;
+    gap: 20px;
+}
+
+.gap-5 {
+    gap: 5px;
+}
+
 .location-wrapper {
     display: flex;
 }
@@ -142,8 +205,8 @@
 }
 
 #map {
-    width: 500px;
-    height: 250px;
+    width: calc(100vw / 2.5);
+    height: calc(100vh / 2);
 }
 
 .loading {
@@ -181,6 +244,37 @@ footer a {
     display: none;
 }
 
+.flex {
+    display: flex;
+}
+
+.flex-c {
+    flex-direction: column;
+}
+
+.gap-20 {
+    gap: 20px;
+}
+
+.flex-ctr {
+    justify-content: center;
+    align-items: center;
+}
+
+.text-ctr {
+    text-align: center;
+}
+
+.pad-10-20 {
+    padding: 10px 20px;
+}
+
+.main p span,
+.main div span {
+    word-break: keep-all;
+    white-space: nowrap;
+}
+
 @-moz-keyframes spin {
     100% {
         -moz-transform: rotate(360deg);
@@ -198,6 +292,12 @@ footer a {
     }
 }
 
+@media only screen and (max-width: 900px) {
+    .main {
+        flex-direction: column;
+    }
+}
+
 @media only screen and (max-width: 740px) {
     .header-mobile {
         flex-direction: column;
@@ -205,5 +305,28 @@ footer a {
 
     .temp-type {
         margin: 10px auto 0 auto;
+    }
+
+    #map {
+        width: 75vw;
+        height: 50vh;
+    }
+}
+
+@media only screen and (max-width: 440px) {
+    .container {
+        width: 420px;
+    }
+
+    .main {
+        margin: auto;
+    }
+
+    .info {
+        width: 400px;
+    }
+
+    #map {
+        width: 330px;
     }
 }

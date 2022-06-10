@@ -17,11 +17,11 @@
             integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
             crossorigin=""
         ></script>
-        <script defer src="script.js"></script>
+        <script src="script.js"></script>
     </head>
     <body>
         <div class="container">
-            <div class="nav">
+            <div class="nav nos">
                 <div class="header">
                     <h2>Weather It</h2>
                     <span>Instant Weather Forecasts</span>
@@ -49,18 +49,30 @@
                 <div class="info">
                     <div class="info-heading">
                         <div class="city-wrapper">
-                            <span id="city"></span>,
-                            <span id="country"></span>
+                            <span id="city"></span><span id="country"></span>
                         </div>
                         <div>
                             Last updated: <span id="local_time">Never</span>
                         </div>
                     </div>
-                    <img id="weather_icon" src="" />
-                    <p id="temp_feels_like">Feels like: 56.7</p>
-                    <p id="temp">Temp: 57.4</p>
-                    <p id="temp_high">High: 67.4</p>
-                    <p id="temp_low">Low: 51.1</p>
+                    <div class="display-wrapper">
+                        <div class="flex flex-ctr text-ctr gap-20 pad-10-20">
+                            <img id="weather_icon" src="" />
+                            <div id="temp"></div>
+                            <div id="temp_feels_like"></div>
+                        </div>
+                        <p id="status" class="text-ctr"></p>
+                        <div class="other-info flex flex-ctr">
+                            <p id="temp_high" class="flex flex-ctr"></p>
+                            <p id="temp_low" class="flex flex-ctr"></p>
+                            <p id="wind_speed" class="flex flex-ctr gap-5"></p>
+                            <p id="humidity" class="flex flex-ctr"></p>
+                        </div>
+                        <div class="other-info flex flex-ctr">
+                            <p id="sunrise" class="flex flex-ctr gap-5"></p>
+                            <p id="sunset" class="flex flex-ctr gap-5"></p>
+                        </div>
+                    </div>
                 </div>
                 <div class="map">
                     <div id="map"></div>
@@ -77,7 +89,7 @@
                 </div>
                 Loading...
             </div>
-            <footer>
+            <footer class="nos">
                 <small>
                     <span>&copy; 2022 zeka-mashi </span>
                     <a href="https://github.com/zeka-mashi/weather-it"
