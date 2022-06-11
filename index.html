@@ -22,10 +22,6 @@
     <body>
         <div class="container">
             <div class="nav nos">
-                <div class="header">
-                    <h2>Weather It</h2>
-                    <span>Instant Weather Forecasts</span>
-                </div>
                 <div class="header-mobile">
                     <div class="search">
                         <input
@@ -33,13 +29,17 @@
                             id="search"
                             placeholder="Search city"
                         />
-                        <input type="button" id="search-btn" value="Search" />
+                        <input
+                            type="button"
+                            id="search-btn"
+                            value="Weather It"
+                        />
                     </div>
                     <div class="temp-type">
                         <div id="celcius" class="temp" data-temp="C">
                             Metric: C, m/s
                         </div>
-                        <div id="fahrenheit" class="temp active" data-temp="F">
+                        <div id="fahrenheit" class="temp" data-temp="F">
                             Imperial: F, mph
                         </div>
                     </div>
@@ -57,7 +57,7 @@
                     </div>
                     <div class="display-wrapper">
                         <div class="flex flex-ctr text-ctr gap-20 pad-10-20">
-                            <img id="weather_icon" src="" />
+                            <img id="weather_icon" src="" draggable="false" />
                             <div id="temp"></div>
                             <div id="temp_feels_like"></div>
                         </div>
@@ -91,7 +91,15 @@
             </div>
             <footer class="nos">
                 <small>
-                    <span>&copy; 2022 zeka-mashi </span>
+                    <span
+                        >Background by
+                        <a
+                            href="https://unsplash.com/@laup"
+                            style="vertical-align: text-bottom"
+                            >Paul Volkmer</a
+                        >
+                        | &copy; 2022 zeka-mashi
+                    </span>
                     <a href="https://github.com/zeka-mashi/weather-it"
                         ><svg
                             style="width: 16px; height: 16px"

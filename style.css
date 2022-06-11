@@ -6,7 +6,11 @@
 }
 
 body {
-    background: lightgray;
+    background: #060913;
+    background-image: url("background.jpg");
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 .nos {
@@ -20,7 +24,8 @@ body {
 .container {
     display: flex;
     flex-direction: column;
-    gap: 50px;
+    position: relative;
+    gap: 40px;
     width: 100%;
     height: 100%;
     min-height: 100vh;
@@ -28,8 +33,7 @@ body {
 
 .nav {
     display: flex;
-    padding: 10px;
-    background: rgb(100, 100, 100);
+    padding: 20px;
     z-index: 1;
 }
 
@@ -47,30 +51,37 @@ body {
 
 .search {
     display: flex;
-    flex: 0.5;
+    gap: 10px;
+    flex: 0.75;
     flex-wrap: nowrap;
     margin: auto;
 }
 
 .search input {
+    background: #06070b;
+    color: white;
     padding: 10px;
     border: none;
     outline: none;
 }
 
+#search:focus {
+    border-bottom-color: #0072ff;
+}
+
 .search input:first-child {
+    font-size: 16px;
     flex: 1;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
+    border-bottom: 2px solid white;
 }
 
 .search input:last-child {
     color: white;
+    font-size: 14px;
+    font-weight: 500;
     background: rgb(51, 51, 51);
-    padding-left: 15px;
-    padding-right: 15px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
+    padding: 0 15px;
+    border-radius: 5px;
     cursor: pointer;
 }
 
@@ -81,12 +92,13 @@ body {
 .temp-type {
     margin: auto 0;
     display: flex;
-    gap: 1px;
+    font-weight: 500;
 }
 
 .temp {
-    background: #8f8f8f;
+    color: white;
     padding: 3px 10px;
+    background: #06070b;
     font-size: 12px;
     margin: auto;
     white-space: nowrap;
@@ -94,19 +106,23 @@ body {
 }
 
 .temp:not(.active):hover {
-    background: #999999;
+    background: #4f5f70;
 }
 
 .temp.active {
-    background: lightgray;
+    background: #3484ff;
 }
 
 .temp:first-child {
+    border: 2px solid #0072ff;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
 }
 
 .temp:last-child {
+    border-top: 2px solid #0072ff;
+    border-right: 2px solid #0072ff;
+    border-bottom: 2px solid #0072ff;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
 }
@@ -122,13 +138,13 @@ body {
     height: fit-content;
     width: fit-content;
     margin: auto;
-    background: #bbcedf;
+    color: white;
+    background: #08090d85;
 }
 
 .info-heading {
     text-align: center;
     padding: 10px;
-    background: aliceblue;
 }
 
 .city-wrapper {
@@ -140,8 +156,8 @@ body {
     display: block;
     height: 1px;
     width: 100px;
-    background: #c9c9c9;
-    margin: 3px auto 10px auto;
+    background: #545454;
+    margin: 10px auto;
 }
 
 .display-wrapper {
@@ -162,7 +178,7 @@ body {
 }
 
 #temp_low > svg {
-    color: #1f1f89;
+    color: #2b2bff;
 }
 
 #wind_speed > svg {
@@ -212,9 +228,9 @@ body {
 .loading {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     position: absolute;
+    font-weight: bold;
     gap: 10px;
     width: 100%;
     height: 100%;
@@ -223,6 +239,7 @@ body {
 }
 
 .loader {
+    margin-top: 50%;
     -webkit-animation: spin 500ms linear infinite;
     -moz-animation: spin 500ms linear infinite;
     animation: spin 500ms linear infinite;
@@ -231,7 +248,6 @@ body {
 footer {
     text-align: center;
     padding: 10px 0;
-    background: rgb(100, 100, 100);
     color: white;
     z-index: 1;
 }
@@ -239,6 +255,7 @@ footer {
 footer a {
     vertical-align: middle;
     color: white;
+    text-decoration: none;
 }
 
 .hidden {
@@ -300,14 +317,14 @@ footer a {
 }
 
 @media only screen and (max-width: 740px) {
-    .header-mobile {
-        flex-direction: column;
-    }
-
     .temp-type {
-        margin: 10px auto 0 auto;
+        flex-direction: column;
+        gap: 5px;
     }
-
+    .temp {
+        border-radius: 10px;
+        border: 2px solid #0072ff;
+    }
     #map {
         width: 75vw;
         height: 50vh;

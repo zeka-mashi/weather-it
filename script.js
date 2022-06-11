@@ -63,10 +63,11 @@ const forecast = (() => {
     let metric = fahrenheit ? "mph" : "m/s";
     const checkSelection = () => {
         if (!fahrenheit) {
-            const f_temp_type = document.querySelector("#fahrenheit");
-            f_temp_type.classList.remove("active");
             const c_temp_type = document.querySelector("#celcius");
             c_temp_type.classList.add("active");
+        } else {
+            const f_temp_type = document.querySelector("#fahrenheit");
+            f_temp_type.classList.add("active");
         }
     };
     const setWeather = (
