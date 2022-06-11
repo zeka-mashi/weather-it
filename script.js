@@ -58,9 +58,17 @@ const interactiveMap = (() => {
 
 const forecast = (() => {
     let weather;
-    let fahrenheit = true;
-    let degree = "°F";
-    let metric = "mph";
+    let fahrenheit = loadSettings("lastDegree", [true]);
+    let degree = fahrenheit ? "°F" : "°C";
+    let metric = fahrenheit ? "mph" : "m/s";
+    const checkSelection = () => {
+        if (!fahrenheit) {
+            const f_temp_type = document.querySelector("#fahrenheit");
+            f_temp_type.classList.remove("active");
+            const c_temp_type = document.querySelector("#celcius");
+            c_temp_type.classList.add("active");
+        }
+    };
     const setWeather = (
         city,
         country,
@@ -80,7 +88,6 @@ const forecast = (() => {
         sunset
     ) => {
         if (fahrenheit) {
-            // array funcs?
             feels_like = (feels_like - 273.15) * (9 / 5) + 32;
             temp = (temp - 273.15) * (9 / 5) + 32;
             high = (high - 273.15) * (9 / 5) + 32;
@@ -109,15 +116,6 @@ const forecast = (() => {
             sunrise,
             sunset
         );
-    };
-    const getWeather = () => {
-        return weather;
-    };
-    const getDegree = () => {
-        return degree;
-    };
-    const getMetric = () => {
-        return metric;
     };
     const safeParse = (data, prop) => {
         return data ? data[prop] : null;
@@ -154,9 +152,8 @@ const forecast = (() => {
                 data.sys.sunrise,
                 data.sys.sunset
             );
-            getWeather();
             interactiveMap.setMap(data.coord.lat, data.coord.lon);
-            updateDOM();
+            updateDOM((newMessage = true));
         } catch (error) {
             //handle error
             alert(error);
@@ -172,6 +169,7 @@ const forecast = (() => {
             updateWeather();
             updateDOM();
         }
+        saveSettings("lastDegree", [selection]);
     };
     const updateWeather = () => {
         if (!fahrenheit) {
@@ -188,9 +186,7 @@ const forecast = (() => {
             weather.wind_speed = weather.wind_speed * 2.237;
         }
     };
-    const updateDOM = () => {
-        const degree = getDegree();
-        const metric = getMetric();
+    const updateDOM = (newMessage) => {
         const city = document.querySelector("#city");
         const country = document.querySelector("#country");
         const weather_icon = document.querySelector("#weather_icon");
@@ -208,20 +204,22 @@ const forecast = (() => {
             country.textContent = `, ` + weather.country;
         }
         weather_icon.src = `http://openweathermap.org/img/wn/${weather.icon}@2x.png`;
-        if (weather.desc) {
-            let messages = [
-                `Seems like ${weather.desc} everywhere`,
-                `Oh look... ${weather.desc}`,
-                `Yet another ${weather.desc} day`,
-                `Yet another day of ${weather.desc}`,
-                `Will there ever be a non-${weather.desc} day?`,
-                `If I look outside, maybe there's ${weather.desc}`,
-                `If you wanted ${weather.desc}, you got ${weather.desc}`,
-                `A ${weather.desc} day could be the best day`,
-                `Repeat after me: ${weather.desc} out there`,
-            ];
-            status.textContent =
-                messages[Math.floor(Math.random() * messages.length)];
+        if (newMessage) {
+            if (weather.desc) {
+                let messages = [
+                    `Seems like ${weather.desc} everywhere`,
+                    `Oh look... ${weather.desc}`,
+                    `Yet another ${weather.desc} day`,
+                    `Yet another day of ${weather.desc}`,
+                    `Will there ever be a non-${weather.desc} day?`,
+                    `If I look outside, maybe there's ${weather.desc}`,
+                    `If you wanted ${weather.desc}, you got ${weather.desc}`,
+                    `A ${weather.desc} day could be the best day`,
+                    `Repeat after me: ${weather.desc} out there`,
+                ];
+                status.textContent =
+                    messages[Math.floor(Math.random() * messages.length)];
+            }
         }
         feels_like.innerHTML = `<span class="temp-text">Feels like</span><br><span>${parseFloat(
             weather.feels_like
@@ -258,7 +256,7 @@ const forecast = (() => {
                 { hour: "2-digit", minute: "2-digit" }
             )}</span>`;
     };
-    return { setWeather, getWeather, fetchWeather, updateUnit };
+    return { checkSelection, fetchWeather, updateUnit };
 })();
 
 function parseSearch(search) {
@@ -266,7 +264,17 @@ function parseSearch(search) {
         alert("Please enter a city name!");
     } else {
         forecast.fetchWeather(search.value);
+        saveSettings("lastCity", [search.value]);
     }
+}
+
+function loadSettings(key, fallback) {
+    const item = JSON.parse(localStorage.getItem(key)) || fallback;
+    return item[0];
+}
+
+function saveSettings(key, arr) {
+    localStorage.setItem(key, JSON.stringify(arr));
 }
 
 document.addEventListener(
@@ -292,7 +300,8 @@ document.addEventListener(
                 parseSearch(search);
             }
         });
-        forecast.fetchWeather("San Francisco");
+        forecast.checkSelection();
+        forecast.fetchWeather(loadSettings("lastCity", ["San Francisco"]));
     },
     false
 );
