@@ -153,6 +153,7 @@ const forecast = (() => {
                 data.sys.sunrise,
                 data.sys.sunset
             );
+            saveSettings("lastCity", [data.name]);
             interactiveMap.setMap(data.coord.lat, data.coord.lon);
             updateDOM((newMessage = true));
         } catch (error) {
@@ -265,7 +266,6 @@ function parseSearch(search) {
         alert("Please enter a city name!");
     } else {
         forecast.fetchWeather(search.value);
-        saveSettings("lastCity", [search.value]);
     }
 }
 
@@ -302,7 +302,9 @@ document.addEventListener(
             }
         });
         forecast.checkSelection();
-        forecast.fetchWeather(loadSettings("lastCity", ["San Francisco"]));
+        let lastCity = loadSettings("lastCity", ["San Francisco"]);
+        search.value = lastCity;
+        forecast.fetchWeather(lastCity);
     },
     false
 );
